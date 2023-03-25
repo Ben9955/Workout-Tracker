@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+    <script defer src="/script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/fc5d0bceec.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>🏃‍♂️ Workout Tracker</title>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="img-container">
+        <img
+          class="logo"
+          src="/mapty prove/workout traker-logos_transparent.png"
+          alt="logo"
+        />
+      </div>
+      <div class="btns">
+        <div class="delete-workouts">
+          <p>You want delete all your workouts? 😱</p>
+          <button class="ok-delete">👍 Yes</button>
+          <button class="no-delete">👎 No</button>
+        </div>
+        <div class="btn delete-all">
+          <i class="fa-solid fa-trash-arrow-up"></i>
+        </div>
+        <div class="btn sort">
+          <i class="fa-solid fa-sort"></i>
+        </div>
+
+        <div class="btn view-all">
+          <i class="fa-solid fa-eye"></i>
+        </div>
+      </div>
+
+      <ul class="workouts-container">
+        <form class="form form-hidden">
+          <div class="input-container">
+            <label for="type">Type</label>
+            <select class="form-input" name="" id="type">
+              <option value="running">Running</option>
+              <option value="cycling">Cycling</option>
+            </select>
+          </div>
+
+          <div class="input-container">
+            <label for="distance">Distance</label>
+            <input
+              type="text"
+              id="distance"
+              class="form-input"
+              placeholder="km"
+            />
+          </div>
+
+          <div class="input-container">
+            <label for="Duration">Duration</label>
+            <input
+              type="text"
+              id="duration"
+              class="form-input"
+              placeholder="min"
+            />
+          </div>
+          <div class="input-container">
+            <label for="cadence">Cadence</label>
+            <input
+              type="text"
+              id="cadence"
+              class="form-input"
+              placeholder="step/min"
+            />
+          </div>
+          <div class="input-container form__row--hidden">
+            <label for="elevation">Elev Gain</label>
+            <input
+              type="text"
+              id="elevation"
+              class="form-input"
+              placeholder="meters"
+            />
+          </div>
+
+          <button type="submit">ok</button>
+        </form>
+
+        <!-- <li class="workout" data-id="">
+          <form class="form-edit">
+            <div class="edit-input">
+              <label for="type-edit">Type</label>
+              <select name="" id="type-edit">
+                <option value="running">Running</option>
+                <option value="cycling">Cycling</option>
+              </select>
+            </div>
+
+            <div class="edit-input">
+              <label for="distance-edit">Distance</label>
+              <input
+                type="text"
+                id="distance-edit"
+                class="form-input-edit"
+                placeholder="km"
+              />
+            </div>
+
+            <div class="edit-input">
+              <label for="duration-edit">Duration</label>
+              <input
+                type="text"
+                id="duration-edit"
+                class="form-input-edit"
+                placeholder="min"
+              />
+            </div>
+
+            <div class="edit-input">
+              <label for="cadence-edit">Cadence</label>
+              <input
+                type="text"
+                id="cadence-edit"
+                class="form-input-edit"
+                placeholder="step/min"
+              />
+            </div>
+
+            <div class="edit-inpu form__row--hidden">
+              <label for="elevation-edit">Elev Gain</label>
+              <input
+                type="text"
+                id="elevation-edit"
+                class="form-input-edit"
+                placeholder="meters"
+              />
+            </div>
+            <div class="btns-edit">
+              <button class="edit-confirm" type="submit">OK</button>
+              <button class="edit-cancel">Cancel</button>
+            </div>
+          </form>
+
+          <div class="workout-header">
+            <h2 class="title-workout">Running on january 21</h2>
+            <i class="fa-solid fa-ellipsis"></i>
+            <div class="workout-options">
+              <div class="icon-header edit-btn">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span>Edit</span>
+              </div>
+              <div class="icon-header delete-btn">
+                <i class="fa-regular fa-circle-xmark"></i>
+                <span>Delete workout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workout-details">
+            <div class="workout-detail">
+              <span class="workout-icon">🏃‍♂️</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">km</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">⏱</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">min</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">⚡</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">min/km</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">🦶</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">spm</span>
+              </div>
+            </div>
+          </div>
+        </li> -->
+        <!-- 
+        <li class="workout" data-id="">
+          <div class="workout-header">
+            <h2 class="title-workout">Cycling on january 21</h2>
+            <i class="fa-solid fa-ellipsis"></i>
+            <div class="workout-options">
+              <div class="icon-header">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span>Edit</span>
+              </div>
+              <div class="icon-header">
+                <i class="fa-regular fa-circle-xmark"></i>
+                <span>Delete workout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="workout-details">
+            <div class="workout-detail">
+              <span class="workout-icon">🚴‍♀️</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">km</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">⏱</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">min</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">⚡</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">km/h</span>
+              </div>
+            </div>
+
+            <div class="workout-detail">
+              <span class="workout-icon">⛰</span>
+              <div>
+                <span class="workout-value">1.5</span>
+                <span class="workout-unit">m</span>
+              </div>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+
+      <p class="copyright">
+        &copy; Copyright by
+        <a target="_blank" href="">Jonas Schmedtmann.</a> Use for learning or
+        your portfolio. Don't use to teach. Don't claim as your own.
+      </p>
+    </div>
+    <div id="map"></div>
+  </body>
+</html>

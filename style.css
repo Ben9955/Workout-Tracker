@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;600;700&display=swap');
+
+:root {
+  --color--1: #3c6255;
+  --color--2: rgb(97, 135, 110);
+  --color--3: #a6bb8d;
+  --color--4: #eae7b1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  padding: 1.5rem;
+  height: 100vh;
+  color: rgb(237, 237, 230);
+  font-weight: 500;
+  display: flex;
+  background-color: rgb(117, 136, 136);
+}
+
+.sidebar {
+  background-color: var(--color--1);
+  flex-basis: 35rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#map {
+  flex: 1;
+  height: 100%;
+  background-color: rgb(138, 186, 186);
+}
+
+.img-container {
+  height: auto;
+  height: 8rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-width: 13rem;
+  margin: 0 auto;
+}
+
+.btns {
+  margin: 1rem auto 1rem auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+.btn {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: inset 5px 5px 5px rgb(58, 56, 56);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn:active {
+  box-shadow: none;
+}
+
+.btn:active i {
+  color: var(--color--3);
+  transform: scale(1.4);
+}
+
+.btn i {
+  transform: scale(1);
+
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--color--4);
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-workouts {
+  position: absolute;
+  text-align: center;
+  background-color: rgba(85, 126, 111, 0.93);
+  border-radius: 10px;
+  left: -3rem;
+  right: -3rem;
+  padding: 1.5rem 1rem;
+  z-index: 5;
+  font-size: 1.3rem;
+  transform: translateX(-120%);
+  transition: all 0.5s ease;
+}
+
+.delete-workouts-active {
+  transform: translateX(0);
+}
+
+.delete-workouts p {
+  margin-bottom: 1.5rem;
+}
+
+.delete-workouts button {
+  font-family: inherit;
+  display: inline-block;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  min-width: 8rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ok-delete:hover {
+  box-shadow: 3px 3px 20px red;
+}
+
+.ok-delete:active {
+  box-shadow: none;
+  transform: scale(0.9);
+}
+
+.no-delete:hover {
+  box-shadow: 3px 3px 20px green;
+}
+
+.no-delete:active {
+  box-shadow: none;
+  transform: scale(0.9);
+}
+/*
+
+
+
+
+*/
+
+.workouts-container {
+  padding: 0rem 2rem 0rem 2rem;
+  list-style: none;
+  height: 77vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color--3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: white;
+  box-shadow: inset 0 0 5px gray;
+  border-radius: 10px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 2rem;
+  padding: 1rem 2rem;
+  box-shadow: 2rem 2rem 1rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: rgba(97, 135, 110, 0.99);
+  margin-bottom: 2rem;
+  height: 8rem;
+  transition: all 0.5s ease;
+  /* position: absolute; */
+}
+
+.form-hidden {
+  transform: translateY(-12rem) rotate(20deg) scale(0);
+  height: 0;
+  margin: 0;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.input-container input,
+#type {
+  /* */
+  width: 100%;
+  padding: 5px 5px;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  background-color: rgb(238, 230, 230);
+  border-radius: 10px;
+}
+
+.input-container label {
+  /**/
+  flex: 0 0 50%;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.form button {
+  display: none;
+}
+
+.input-container input:focus,
+select:focus {
+  outline: none;
+  background-color: white;
+}
+
+.workout {
+  padding: 1rem 1.5rem;
+  background-color: var(--color--2);
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.7s ease;
+}
+
+.cycling-border {
+  border-left: 5px solid greenyellow;
+}
+
+.running-border {
+  border-left: 5px solid yellowgreen;
+}
+
+.workout-hidden {
+  transform: translateY(30rem) rotateZ(-30deg);
+  position: absolute;
+  opacity: 0;
+  z-index: 5;
+}
+
+.workout-header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.workout-options {
+  position: absolute;
+  background-color: rgba(250, 250, 250, 0.9);
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  justify-content: space-between;
+  right: 0;
+  top: 1rem;
+  height: 5rem;
+  transform: scale(0) translateY(-8rem);
+  transition: all 0.5s ease;
+  /* display: none; */
+}
+
+.workout-options-view {
+  transform: scale(1) translateY(0);
+}
+
+.icon-header {
+  color: var(--color--1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.icon-header:hover {
+  color: var(--color--2);
+  transform: scale(0.95);
+}
+
+.title-workout {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.fa-ellipsis {
+  cursor: pointer;
+  font-family: 600;
+  font-size: 1.3rem;
+
+  transition: all 0.4s ease;
+}
+
+.fa-ellipsis:hover {
+  color: var(--color--4);
+}
+
+.workout-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.workout-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workout-detail div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.workout-icon {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.workout-value {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.workout-unit {
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+.form-edit {
+  position: absolute;
+  background-color: #eae7b1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  transform: translateX(-100%);
+}
+
+.copyright {
+  margin-top: auto;
+  text-align: center;
+  line-height: 1.3;
+  padding: 1rem 2rem 0 2rem;
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+a:hover {
+  color: var(--color--3);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color--4);
+  font-weight: 400;
+  transition: all 0.4s ease;
+}
+
+/* 
+
+
+
+
+
+
+
+*/
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--color--1);
+  color: #eee;
+  border-radius: 8px;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding-right: 0.6rem;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 1.1rem;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: var(--color--2);
+}
+
+.popup-running .leaflet-popup-content-wrapper {
+  border-left: 8px solid yellowgreen;
+}
+.popup-cycling .leaflet-popup-content-wrapper {
+  border-left: 8px solid greenyellow;
+}
+
+/*
+
+
+
+
+*/
+
+.form-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: gray;
+  color: #eee;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0.8rem 1rem;
+  transition: all 0.5s ease;
+
+  z-index: 1;
+}
+
+.form-edit-move {
+  transform: translateX(0%);
+}
+
+.edit-input {
+  display: flex;
+  gap: 0.3rem;
+  flex-direction: column;
+}
+.form-input-edit {
+  flex: 50%;
+}
+.edit-input label {
+  flex: 50%;
+}
+.edit-input input,
+#type-edit {
+  width: 100%;
+  padding: 5px 5px;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  background-color: rgb(238, 230, 230);
+  border-radius: 5px;
+  outline: none;
+}
+
+.btns-edit {
+  grid-column: 1 / -1;
+  margin: 0 auto;
+  margin-top: auto;
+}
+
+.btns-edit button {
+  background-color: var(--color--3);
+  color: #eee;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: none;
+  min-width: 6rem;
+  margin: 0 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.btns-edit button:hover {
+  opacity: 0.8;
+}
+
+.form__row--hidden {
+  display: none;
+}
